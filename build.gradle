@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+
 }
 
 group 'News-Portal'
@@ -12,5 +13,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'com.sparkjava', name: 'spark-core', version: '2.3'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'org.sql2o', name: 'sql2o', version: '1.5.4'
+    implementation group: 'org.postgresql', name: 'postgresql', version: "9.4-1201-jdbc41"
+    implementation 'org.slf4j:slf4j-simple:1.7.21'
+    implementation 'com.google.code.gson:gson:2.5'
 }
