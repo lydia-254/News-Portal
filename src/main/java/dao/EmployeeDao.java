@@ -12,7 +12,7 @@ public interface EmployeeDao {
 
     //READ
     List<Employee> getAll();
-    List<Employee>getAllDepartmentUser(int departmentId);
+    List<Employee>getAllDepartmentEmployee(int departmentId);
 
     Employee findById(int id);
 
