@@ -33,11 +33,11 @@ public class Sql2oDepartmentDao implements DepartmentDao{
 
     @Override
     public void addDepartmentEmployee(Departments departments, Employee employee) {
-        String sql = "INSERT INTO department_users (departmentId, userId) VALUES (:departmentId, :userId)";
+        String sql = "INSERT INTO department_employees (departmentId, employeeId) VALUES (:departmentId, :employeeId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("departmentId", departments.getId())
-                    .addParameter("userId", employee.getId())
+                    .addParameter("employeeId", employee.getId())
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
@@ -57,16 +57,16 @@ public class Sql2oDepartmentDao implements DepartmentDao{
     @Override
     public List<Employee> getAllDepartmentEmployee(int departmentId) {
         List<Employee> employee = new ArrayList(); //empty list
-        String joinQuery = "SELECT userId FROM department_users WHERE departmentId = :departmentId";
+        String joinQuery = "SELECT employeeId FROM department_employees WHERE departmentId = :departmentId";
         try (Connection con = sql2o.open()) {
-            List<Integer> allUserIds = con.createQuery(joinQuery)
+            List<Integer> allEmployeeIds = con.createQuery(joinQuery)
                     .addParameter("departmentId", departmentId)
                     .executeAndFetch(Integer.class);
-            for (Integer userId : allUserIds){
-                String newsQuery = "SELECT * FROM users WHERE id = :userId";
+            for (Integer employeeId : allEmployeeIds){
+                String newsQuery = "SELECT * FROM employees] WHERE id = :employeesId";
                 employee.add(
                         con.createQuery(newsQuery)
-                                .addParameter("userId", userId)
+                                .addParameter("employeeId", employeeId)
                                 .executeAndFetchFirst(Employee.class));
             }
         } catch (Sql2oException ex){
