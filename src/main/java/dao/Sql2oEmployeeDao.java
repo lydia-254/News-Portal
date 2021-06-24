@@ -5,6 +5,8 @@ import models.Employee;
 import org.sql2o.Sql2o;
 
 import org.sql2o.Connection;
+import org.sql2o.Sql2oException;
+
 import java.util.List;
 
 public class Sql2oEmployeeDao implements EmployeeDao{
@@ -29,12 +31,20 @@ public class Sql2oEmployeeDao implements EmployeeDao{
 
     @Override
     public void addDepartmentUser(Employee employee, Departments department) {
-
+        String sql = "INSERT INTO department_employees (departmentId, employeeId) VALUES (:departmentId, :employeeId)";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("departmentId", department.getId())
+                    .addParameter("employeeId", employee.getId())
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
     }
 
     @Override
     public List<Employee> getAll() {
-        return null;
+
     }
 
     @Override
