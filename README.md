@@ -15,6 +15,15 @@ It is a rest REST API application for querying and retrieving scoped news and in
 
 * Gradle run javac News Portal.java to compile and java news portal to run the program.
 
+​
+# Server Side
+​
+The application has three model classes;
+​
+- Departments
+- Employee
+- News
+
 ## Set up
 
 
@@ -25,6 +34,8 @@ It is a rest REST API application for querying and retrieving scoped news and in
 * SPARK
 * HTML
 * POSTGRES
+* Sql2o
+* GIT VCS
 
 ## Live Site
 
