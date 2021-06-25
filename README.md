@@ -25,6 +25,15 @@ The application has three model classes;
 - News
 
 ## Set up
+CREATE DATABASE news_portal;
+\c news_portal;
+CREATE TABLE departments(id serial PRIMARY KEY, name VARCHAR, num_members INTEGER);
+CREATE TABLE
+news_portal=# CREATE TABLE news( id serial PRIMARY KEY, content VARCHAR, employeeId INTEGER, DepartmentId INTEGER);
+CREATE TABLE
+news_portal=# CREATE TABLE employee(  id serial PRIMARY KEY, name VARCHAR, position VARCHAR, role VARCHAR, DepartmentId INTEGER);
+CREATE TABLE
+news_portal=# CREATE DATABASE news_portal_test WITH TEMPLATE news_portal;
 
 
 ## Technologies used

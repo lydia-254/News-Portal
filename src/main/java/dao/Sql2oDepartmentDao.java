@@ -24,7 +24,7 @@ public class Sql2oDepartmentDao implements DepartmentDao{
                     .bind(departments)
                     .executeUpdate()
                     .getKey();
-            Departments.setId(id);
+            departments.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
