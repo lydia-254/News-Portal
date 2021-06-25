@@ -30,5 +30,9 @@ public class App {
             res.type("application/json");
             return gson.toJson(employeeDao.getAll());
         });
+        get("/employee",(req,res)->{
+            res.type("application/json");
+            return gson.toJson(employeeDao.getAll());
+        });
     }
 }
