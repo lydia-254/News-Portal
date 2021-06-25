@@ -111,6 +111,10 @@ public class Sql2oEmployeeDao implements EmployeeDao {
 
             }
         }
+
+    public void addDepartmentEmployee(Employee employee, Departments departments) {
+
     }
+}
 
 

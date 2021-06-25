@@ -83,21 +83,27 @@ public class App {
                 return null;
             }
         });
+        get("/department/:id/news",(req,res)->{
+            res.type("application/json");
+            int departmentId = Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(departmentDao.findById(departmentId));
+        });
         post("/department/:departmentId/employees/:employeeId","application/json",(req,res)->{
             int departmentId = Integer.parseInt(req.params("departmentId"));
-            int userId = Integer.parseInt(req.params("employeeId"));
+            int employeeId = Integer.parseInt(req.params("employeeId"));
             Departments departments = departmentDao.findById(departmentId);
-            Employee employee = employeeDao.findById(userId);
+            Employee employee = employeeDao.findById(employeeId);
             if (departments != null && employee != null) {
                 //both exist and can be associated
-                employeeDao.addDepartmentUser(employee, departments);
+                employeeDao.addDepartmentEmployee(employee, departments);
                 res.status(201);
                 return gson.toJson(String.format("Department '%s' and Employee '%s' have been associated", employee.getName(), departments.getName()));
             } else {
                 return null;
             }
         });
-        get("/department/:id/users",(req,res)->{
+        get("/department/:id/employees",(req,res)->{
             res.type("application/json");
             int departmentId = Integer.parseInt(req.params("id"));
             res.type("application/json");
