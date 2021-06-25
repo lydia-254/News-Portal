@@ -83,5 +83,26 @@ public class App {
                 return null;
             }
         });
+        post("/department/:departmentId/employees/:employeeId","application/json",(req,res)->{
+            int departmentId = Integer.parseInt(req.params("departmentId"));
+            int userId = Integer.parseInt(req.params("employeeId"));
+            Departments departments = departmentDao.findById(departmentId);
+            Employee employee = employeeDao.findById(userId);
+            if (departments != null && employee != null) {
+                //both exist and can be associated
+                employeeDao.addDepartmentUser(employee, departments);
+                res.status(201);
+                return gson.toJson(String.format("Department '%s' and Employee '%s' have been associated", employee.getName(), departments.getName()));
+            } else {
+                return null;
+            }
+        });
+        get("/department/:id/users",(req,res)->{
+            res.type("application/json");
+            int departmentId = Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(departmentDao.findById(departmentId));
+        });
+
     }
 }
