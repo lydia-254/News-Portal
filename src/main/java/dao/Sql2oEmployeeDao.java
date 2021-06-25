@@ -21,7 +21,7 @@ public class Sql2oEmployeeDao implements EmployeeDao {
 
     @Override
     public void add(Employee employee) {
-        String sql = "INSERT INTO employees(name,position,role,departmentId) VALUES( :name, :position,:role, :departmentId)";
+        String sql = "INSERT INTO employee(name,position,role,departmentId) VALUES( :name, :position,:role, :departmentId)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(employee)
@@ -33,7 +33,7 @@ public class Sql2oEmployeeDao implements EmployeeDao {
 
     @Override
     public void addDepartmentUser(Employee employee, Departments department) {
-        String sql = "INSERT INTO department_employees (departmentId, employeeId) VALUES (:departmentId, :employeeId)";
+        String sql = "INSERT INTO department_employee (departmentId, employeeId) VALUES (:departmentId, :employeeId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("departmentId", department.getId())
