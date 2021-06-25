@@ -41,7 +41,10 @@ public class App {
             res.status(100);
             res.type("application/json");
             return gson.toJson(newsDao.getAll());
-
+        });
+        get("/news", (req,res)->{
+            res.type("application/json");
+            return  gson.toJson(newsDao.getAll());
         });
     }
 }
