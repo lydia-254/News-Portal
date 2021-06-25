@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import dao.Sql2oDepartmentDao;
 import dao.Sql2oEmployeeDao;
 import dao.Sql2oNewsDao;
+import models.Departments;
 import models.Employee;
 import models.News;
 import org.sql2o.Connection;
@@ -68,6 +69,19 @@ public class App {
             res.type("application/json");
             return gson.toJson(departmentDao.findById(departmentId));
         });
-
+        post("/department/:departmentId/news/:newsId","application/json",(req,res)->{
+            int departmentId = Integer.parseInt(req.params("departmentId"));
+            int newsId = Integer.parseInt(req.params("newsId"));
+            Departments departments = departmentDao.findById(departmentId);
+            News news = newsDao.findById(newsId);
+            if (departments != null && news != null) {
+                //both exist and can be associated
+                newsDao.addDepartmentNews(news, departments);
+                res.status(201);
+                return gson.toJson(String.format("Department '%s' and News '%s' have been associated", news.getContent(), departments.getName()));
+            } else {
+                return null;
+            }
+        });
     }
 }
