@@ -3,6 +3,7 @@ import dao.Sql2oDepartmentDao;
 import dao.Sql2oEmployeeDao;
 import dao.Sql2oNewsDao;
 import models.Employee;
+import models.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -26,13 +27,21 @@ public class App {
         post("/employee/new", "application/json", (req, res) -> {
             Employee employee = gson.fromJson(req.body(), Employee.class);
             employeeDao.add(employee);
-            res.status(201);
+            res.status(100);
             res.type("application/json");
             return gson.toJson(employeeDao.getAll());
         });
         get("/employee",(req,res)->{
             res.type("application/json");
             return gson.toJson(employeeDao.getAll());
+        });
+        post("/news/new", "application/json",(req,res)->{
+            News news=gson.fromJson(req.body(), News.class);
+            newsDao.add(news);
+            res.status(100);
+            res.type("application/json");
+            return gson.toJson(newsDao.getAll());
+
         });
     }
 }
