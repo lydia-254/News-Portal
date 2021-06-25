@@ -5,6 +5,7 @@ import models.Employee;
 import models.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 
 import java.util.List;
 
@@ -29,7 +30,15 @@ public class Sql2oNewsDao implements NewsDao{
 
     @Override
     public void addDepartmentNews(News news, Departments department) {
-
+        String sql = "INSERT INTO department_news (departmentId, newsId) VALUES (:departmentId, :newsId)";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("departmentId", department.getId())
+                    .addParameter("newsId", news.getId())
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
     }
 
     @Override
@@ -41,22 +50,34 @@ public class Sql2oNewsDao implements NewsDao{
     }
 
     @Override
-    public List<News> getAllDepartmentNews(int departmentId) {
-        return null;
-    }
-
-    @Override
     public News findById(int id) {
-        return null;
+        String sql ="SELECT * FROM news WHERE id = :id ";
+        try(Connection con = sql2o.open()){
+            return con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(News.class);
+        }
     }
 
     @Override
-    public void update(News news, int id, String name, String position, String role, int departmentId) {
-
+    public void update(News news,int id,String content,int employeeId,int DepartmentId ) {
+        String sql="UPDATE news SET(content,employeeId)=(:content,:employeeId) WHERE id=:id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id",id)
+                    .addParameter("content",content)
+                    .addParameter("employeeId",employeeId)
+                    .executeUpdate();
+            news.setContent(content);
+            news.setEmployeeId(employeeId);
+        }
     }
 
     @Override
     public void clearAll() {
-
+        String sql = "DELETE FROM news";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql).executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }
