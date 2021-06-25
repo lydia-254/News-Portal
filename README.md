@@ -15,6 +15,8 @@ It is a rest REST API application for querying and retrieving scoped news and in
 
 * Gradle run javac News Portal.java to compile and java news portal to run the program.
 
+## Set up
+
 
 ## Technologies used
 * JAVA
@@ -23,7 +25,6 @@ It is a rest REST API application for querying and retrieving scoped news and in
 * SPARK
 * HTML
 * POSTGRES
-* HEROKU
 
 ## Live Site
 

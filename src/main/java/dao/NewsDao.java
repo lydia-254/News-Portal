@@ -2,22 +2,22 @@ package dao;
 
 import models.Departments;
 import models.Employee;
+import models.News;
 
 import java.util.List;
 
 public interface NewsDao {
-    //CREATE
-    void add(Employee employee);
-    void addDepartmentUser(Employee employee, Departments department);
 
-    //READ
-    List<Employee> getAll();
-    List<Employee>getAllDepartmentUser(int departmentId);
+    void add(News news);
+    void addDepartmentNews(News news, Departments department);
 
-    Employee findById(int id);
 
-    //UPDATE
-    void update(Employee employee, int id,String name,String position,String role,int departmentId);
+    List<News> getAll();
+    List<News>getAllDepartmentNews(int departmentId);
+
+    News findById(int id);
+
+    void update(News news, int id,String name,String position,String role,int departmentId);
 
     //DELETE
     void clearAll();
