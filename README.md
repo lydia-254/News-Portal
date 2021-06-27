@@ -24,6 +24,23 @@ The application has three model classes;
 - Employee
 - News
 
+The API routes;
+​
+- GET "/employee"
+- GET "/departments"
+- GET "/employee/:id"
+- GET "/departments/:id"
+- GET "/departments/:id/employee"
+- GET "/departments/:id/news"
+- GET "/news"
+- GET "/news/general"
+- GET "/news/department"
+​
+- POST "/Employee/new"
+- POST "/Departments/new"
+- POST "/News/new"
+- POST "/DepartmentNews/new"
+​
 ## Set up
 CREATE DATABASE news_portal;
 \c news_portal;
